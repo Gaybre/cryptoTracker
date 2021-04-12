@@ -1,13 +1,13 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, Image, Pressable, StyleSheet} from 'react-native';
 import Colors from '../../res/colors';
 import ArrowDown from '../../assets/arrow_dow.png';
 import ArrowUp from '../../assets/arrow_up.png';
 
-const CoinsItem = ({item}) => {
+const CoinsItem = ({ item, onPress }) => {
   return (
-    <View style={styles.container}>
+    <Pressable onPress={onPress} style={styles.container}>
 
       <View style={styles.row}>
         <Text style={styles.symbolText}>{item.symbol}</Text>
@@ -23,7 +23,7 @@ const CoinsItem = ({item}) => {
         }
       </View>
 
-    </View>
+    </Pressable>
   );
 };
 
