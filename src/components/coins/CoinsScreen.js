@@ -22,7 +22,6 @@ class CoinsScreen extends Component {
     this.setState({loading: true});
 
     const res = await Http.instance.get('https://api.coinlore.net/api/tickers/');
-    console.log('coins data', res.data);
     this.setState({
       coins: res.data,
       allCoins: res.data,
@@ -31,7 +30,6 @@ class CoinsScreen extends Component {
   }
 
   handlePress = (coin) => {
-    // console.log('go to details', this.props, coin);
     this.props.navigation.navigate('CoinDetail', { coin });
   }
 

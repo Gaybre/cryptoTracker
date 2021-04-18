@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { ceil } from 'react-native-reanimated';
 import Colors from '../../res/colors'
 
 const CoinMarketItem = ({coin}) => {
