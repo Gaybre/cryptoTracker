@@ -3,6 +3,7 @@ import { View, Text, Image, Pressable, Alert, SectionList, FlatList, StyleSheet 
 import CoinMarketItem from './CoinMarketItem';
 import Http from '../../libs/http';
 import Storage from '../../libs/storage';
+import { getSymbol } from '../../libs/getSymbol';
 import Colors from '../../res/colors';
 
 class CoinDetailScreen extends Component {
@@ -70,14 +71,6 @@ class CoinDetailScreen extends Component {
     }
   }
 
-  // getting the icon url
-  getSymbol = (name) => {
-    if (name) {
-      const coinSymbol = name.toLowerCase().replace(" ", "-");
-      return `https://c1.coinlore.com/img/16x16/${coinSymbol}.png`
-    }
-  }
-
   // it setting an array of the data details to show
   getSections = (coin) => {
     const sections = [
@@ -111,7 +104,7 @@ class CoinDetailScreen extends Component {
       <View style={styles.container}>
         <View style={styles.subHeader}>
           <View style={styles.row}>
-            <Image style={styles.iconSymbol} source={{uri: this.getSymbol(coin.name)}} />
+            <Image style={styles.iconSymbol} source={{uri: getSymbol(coin.name)}} />
             <Text style={styles.titleText}>{coin.name}</Text>
           </View>
           <Pressable

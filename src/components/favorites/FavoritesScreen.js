@@ -36,7 +36,7 @@ class FavoritesScreen extends Component {
 
   render() {
     const { favorites } = this.state;
-    console.log('Estas son del state: ', favorites);
+
     return (
       <View style={styles.container}>
         {favorites.length > 0
