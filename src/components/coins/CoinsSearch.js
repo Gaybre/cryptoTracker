@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TextInput, Platform, View, StyleSheet } from 'react-native';
+import { TextInput, Platform, View, Text, Pressable, StyleSheet } from 'react-native';
 import Colors from '../../res/colors';
 
 class CoinsSearch extends Component {
@@ -10,12 +10,12 @@ class CoinsSearch extends Component {
 
   handleText = (query) => {
     this.setState({ query });
-
     if(this.props.onChange) {
       this.props.onChange(query)
     }
-
   }
+
+  // clearInput = () => this.setState({query: ""});
 
   render() {
     const { query } = this.state;
@@ -31,6 +31,13 @@ class CoinsSearch extends Component {
           placeholder="Search coin"
           placeholderTextColor="#fff"
         />
+        {/* {(query !== "") && <Pressable
+          onPress={this.clearInput}
+          style={styles.clearText}
+        >
+          <Text>X</Text>
+        </Pressable>
+        } */}
       </View>
     );
   }
@@ -51,6 +58,15 @@ const styles = StyleSheet.create({
     margin: 8,
     borderRadius: 8
   }
+  // clearText: {
+  //   position: "absolute",
+  //   right: 16,
+  //   top: 12,
+  //   paddingVertical: 2,
+  //   paddingHorizontal: 7,
+  //   borderRadius: 50,
+  //   backgroundColor: Colors.carmine
+  // }
 });
 
 export default CoinsSearch;

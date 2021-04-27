@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, Pressable, Alert, SectionList, FlatList, StyleSheet } from 'react-native';
+import { View, Text, Image, Pressable, Alert, ActivityIndicator, SectionList, FlatList, StyleSheet } from 'react-native';
 import CoinMarketItem from './CoinMarketItem';
 import Http from '../../libs/http';
 import Storage from '../../libs/storage';
@@ -11,7 +11,8 @@ class CoinDetailScreen extends Component {
   state = {
     coin: {},
     markets: [],
-    isFavorite: false
+    isFavorite: false,
+    loadingMarkets: false
   }
 
   // it receives and set the tapped currency
@@ -22,6 +23,7 @@ class CoinDetailScreen extends Component {
     this.setState({ coin }, () => {
       this.getFavorite();
     });
+    this.setState({loadingMarkets: true});
     this.getMarkets(coin.id);
   }
 
@@ -94,11 +96,11 @@ class CoinDetailScreen extends Component {
   getMarkets = async (coinId) => {
     const url = `https://api.coinlore.net/api/coin/markets/?id=${coinId}`
     const markets = await Http.instance.get(url);
-    this.setState({ markets });
+    this.setState({ markets, loadingMarkets: false });
   }
 
   render() {
-    const { coin, markets, isFavorite } = this.state;
+    const { coin, markets, isFavorite, loadingMarkets } = this.state;
 
     return (
       <View style={styles.container}>
@@ -138,6 +140,7 @@ class CoinDetailScreen extends Component {
 
         <Text style={styles.marketsTitle}>Markets</Text>
 
+        {loadingMarkets && <ActivityIndicator color="#fff" size="large" style={styles.loader} />}
         <FlatList
           style={styles.listMarket}
           data={markets}
@@ -217,6 +220,9 @@ const styles = StyleSheet.create({
   },
   btnText: {
     color: Colors.white
+  },
+  loader: {
+    justifyContent: "center"
   }
 })
 
